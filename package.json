@@ -1,0 +1,39 @@
+{
+  "name": "mqtt-lambda",
+  "version": "1.0.0",
+  "description": "A service for hosting independent mqtt subscribers.",
+  "main": "app.js",
+  "scripts": {
+    "ci": "npm run lint && npm run test",
+    "lint": "eslint .",
+    "start": "node lib/service.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CanTireInnovations/mqtt-lambda.git"
+  },
+  "keywords": [
+    "mqtt",
+    "lambda",
+    "subscription"
+  ],
+  "author": "CTI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CanTireInnovations/mqtt-lambda/issues"
+  },
+  "homepage": "https://github.com/CanTireInnovations/mqtt-lambda#readme",
+  "dependencies": {
+    "bluebird": "^3.0.2",
+    "bunyan": "^1.5.1",
+    "cti-process-environment-variable-reader": "^1.0.0",
+    "lodash": "^3.10.1",
+    "mqtt": "^1.5.0",
+    "mqtt-regex-builder": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.8.0",
+    "mocha": "^2.3.3"
+  }
+}

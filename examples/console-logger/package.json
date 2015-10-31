@@ -1,0 +1,9 @@
+{
+  "name": "console-handler",
+  "private": true,
+  "version": "1.0.0",
+  "description": "An example mqtt lambda function which logs the messages to standard out.",
+  "main": "handler.js",
+  "author": "CTI",
+  "license": "ISC"
+}
