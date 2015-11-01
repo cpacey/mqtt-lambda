@@ -1,7 +1,6 @@
 machine:
     environment:
         DOCKER_BUILD_REGISTRY: cantireinnovations
-        DOCKER_BUILD_TAG: $CIRCLE_SHA1
     node:
         version: 4.1.0
     services:
@@ -27,5 +26,13 @@ deployment:
         owner: CanTireInnovations
         commands:
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" -e no-reply@cantireinnovations.com
-            - npm run docker.push
+
+            - npm run docker.push:
+                environment:
+                    DOCKER_BUILD_TAG: $CIRCLE_SHA1
             - echo $DOCKER_BUILD_TAG > $CIRCLE_ARTIFACTS/DOCKER_BUILD_TAG.txt
+
+            - npm run docker.push:
+                environment:
+                    DOCKER_BUILD_TAG: latest
+
