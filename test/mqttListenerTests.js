@@ -36,24 +36,27 @@ describe( 'mqttListener', function() {
             } );
 
             return mqttListener( testSubscriber )
-                .then( function() {
+                .then( function( listener ) {
 
                     var testClient = Promise.promisifyAll( mqtt.connect( brokerUrl ) );
                     return testClient
                         .publishAsync( 'mqttListener/example', 'from the cloud' )
                         .then( function() {
                             testClient.end();
+                        } )
+                        .then( function() {
+
+                            // wait on the receive promise
+                            return receiveP;
+                        } )
+                        .then( function( recieved ) {
+
+                            assert.equal( recieved.topic, 'mqttListener/example' );
+                            assert.equal( recieved.message, 'from the cloud' );
+                        } )
+                        .finally( function() {
+                            listener.stop();
                         } );
-                } )
-                .then( function() {
-
-                    // wait on the receive promise
-                    return receiveP;
-                } )
-                .then( function( recieved ) {
-
-                    assert.equal( recieved.topic, 'mqttListener/example' );
-                    assert.equal( recieved.message, 'from the cloud' );
                 } );
         } );
     } );
