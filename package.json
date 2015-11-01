@@ -2,13 +2,18 @@
   "name": "mqtt-lambda",
   "version": "1.0.3",
   "description": "A service for hosting independent mqtt subscribers.",
-  "main": "app.js",
+  "bin": {
+    "mqtt-lambda": "./bin/mqtt-lambda"
+  },
   "scripts": {
     "ci": "npm run lint && npm run test",
     "lint": "eslint .",
     "start": "node lib/service.js",
     "test": "mocha",
-    "coverage": "istanbul cover _mocha -- -u exports -R spec"
+    "coverage": "istanbul cover _mocha -- -u exports -R spec",
+    "docker.build": "docker build -t $DOCKER_BUILD_REGISTRY/mqtt-lambda:$DOCKER_BUILD_TAG .",
+    "docker.push": "docker push $DOCKER_BUILD_REGISTRY/mqtt-lambda:$DOCKER_BUILD_TAG",
+    "docker.buildAndPush": "npm run docker.build && npm run docker.push"
   },
   "repository": {
     "type": "git",

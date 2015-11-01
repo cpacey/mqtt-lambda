@@ -1,0 +1,6 @@
+circle
+coverage
+examples
+node_modules
+*.log
+*~

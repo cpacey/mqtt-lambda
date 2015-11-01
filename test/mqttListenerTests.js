@@ -12,7 +12,7 @@ var brokerUrl = 'mqtt://localhost';
 process.env = {
     MQTT_BROKER_URL: brokerUrl,
     MQTT_CLIENT_CONNECT_TIMEOUT: 1000,
-    SUBSCRIBERS_ROOT: './examples'
+    SUBSCRIBERS_ROOT: 'null'
 };
 /* eslint-enable no-process-env */
 
