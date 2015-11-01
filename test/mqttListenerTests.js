@@ -2,19 +2,21 @@
 
 var assert = require( 'assert' );
 var mqtt = require( 'mqtt' );
+var mqttPacket = require( 'mqtt-packet' );
+var net = require( 'net' );
 var Promise = require( 'bluebird' );
-var sinon = require( 'sinon' );
 
 var brokerUrl = 'mqtt://localhost';
 
+/* eslint-disable no-process-env */
 process.env = {
     MQTT_BROKER_URL: brokerUrl,
     MQTT_CLIENT_CONNECT_TIMEOUT: 1000,
     SUBSCRIBERS_ROOT: './examples'
 };
+/* eslint-enable no-process-env */
 
 var conf = require( '../lib/conf.js' );
-var log = require( '../lib/log.js' );
 var mqttListener = require( '../lib/mqttListener.js' );
 
 describe( 'mqttListener', function() {
@@ -32,7 +34,7 @@ describe( 'mqttListener', function() {
             var receiveP = new Promise( function( resolve, reject ) {
                 testSubscriber.receive = function( topic, message, extras ) {
                     resolve( { topic, message, extras } );
-                }
+                };
             } );
 
             return mqttListener( testSubscriber )
@@ -61,4 +63,47 @@ describe( 'mqttListener', function() {
         } );
     } );
 
+    describe( 'when connection fails', function() {
+        it( 'should throw error', function() {
+
+            var testSubscriber = {
+                subscription: {
+                    topic: 'mqttListener/example'
+                },
+                receive: function() {
+                    assert.fail( 'should never be called' );
+                }
+            };
+
+            var mockMqttServer = Promise.promisifyAll( net.createServer( function( client ) {
+
+                var packet = mqttPacket.generate( {
+                    cmd: 'connack',
+                    returnCode: 4,
+                    sessionPresent: false
+                } );
+
+                client.write( packet );
+                client.end();
+            } ) );
+
+            return mockMqttServer
+                .listenAsync( 1884 )
+                .then( function() {
+
+                    conf.broker.url = 'mqtt://localhost:1884';
+
+                    return mqttListener( testSubscriber )
+                        .then( function() {
+                            assert.fail( 'should not have connected' );
+                        } )
+                        .catch( function( err ) {
+                            assert.equal( err.message, 'Connection refused: Bad username or password' );
+                        } );
+                } )
+                .finally( function() {
+                    mockMqttServer.closeAsync();
+                } );
+        } );
+    } );
 } );

@@ -6,6 +6,7 @@
   "ecmaFeatures": {
     "arrowFunctions": true,
     "defaultParams": true,
+    "objectLiteralShorthandProperties": true,
     "templateStrings": true
   },
   "rules": {
