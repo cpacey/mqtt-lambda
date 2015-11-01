@@ -1,0 +1,14 @@
+mosquitto:
+  image: ansi/mosquitto
+  ports:
+    - 1883:1883
+  restart: always
+
+mqttLambda:
+  image: cantireinnovations/mqtt-lambda
+  environment:
+    - MQTT_BROKER_URL=mqtt://mosquitto
+  links:
+    - mosquitto:mosquitto
+  volumes:
+    - ./:/opt/mqtt-subscribers/
