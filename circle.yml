@@ -30,7 +30,7 @@ deployment:
             - npm run docker.push:
                 environment:
                     DOCKER_BUILD_TAG: $CIRCLE_SHA1
-            - echo $DOCKER_BUILD_TAG > $CIRCLE_ARTIFACTS/DOCKER_BUILD_TAG.txt
+            - echo $CIRCLE_SHA1 > $CIRCLE_ARTIFACTS/DOCKER_BUILD_TAG.txt
 
             - npm run docker.push:
                 environment:
