@@ -27,12 +27,12 @@ deployment:
         commands:
             - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" -e no-reply@cantireinnovations.com
 
-            - npm run docker.push:
+            - npm run docker.buildAndPush:
                 environment:
                     DOCKER_BUILD_TAG: $CIRCLE_SHA1
             - echo $CIRCLE_SHA1 > $CIRCLE_ARTIFACTS/DOCKER_BUILD_TAG.txt
 
-            - npm run docker.push:
+            - npm run docker.buildAndPush:
                 environment:
                     DOCKER_BUILD_TAG: latest
 
