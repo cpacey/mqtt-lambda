@@ -41,7 +41,7 @@ function parseArgs( argv, env ) {
             throw new Error( 'unknown argument ' + key );
         }
 
-        env[ envName ] = value;
+        env[ envName ] = value.toString();
     } );
 }
 

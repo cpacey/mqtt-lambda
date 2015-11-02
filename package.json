@@ -1,6 +1,6 @@
 {
   "name": "mqtt-lambda",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A service for hosting independent mqtt subscribers.",
   "bin": {
     "mqtt-lambda": "./bin/mqtt-lambda"
@@ -8,7 +8,7 @@
   "scripts": {
     "ci": "npm run lint && npm run test",
     "lint": "eslint .",
-    "start": "node lib/service.js",
+    "start": "./bin/mqtt-lambda",
     "test": "mocha",
     "coverage": "istanbul cover _mocha -- -u exports -R spec",
     "docker.build": "docker build -t $DOCKER_BUILD_REGISTRY/mqtt-lambda:$DOCKER_BUILD_TAG .",
@@ -34,7 +34,7 @@
     "args": "0.0.3",
     "bluebird": "^3.0.2",
     "bunyan": "^1.5.1",
-    "cti-process-environment-variable-reader": "^1.0.0",
+    "cti-process-environment-variable-reader": "^1.1.0",
     "lodash": "^3.10.1",
     "mqtt": "^1.5.0",
     "mqtt-regex-builder": "^1.0.0"
