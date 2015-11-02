@@ -34,7 +34,7 @@
     "args": "0.0.3",
     "bluebird": "^3.0.2",
     "bunyan": "^1.5.1",
-    "cti-process-environment-variable-reader": "^1.0.0",
+    "cti-process-environment-variable-reader": "^1.1.0",
     "lodash": "^3.10.1",
     "mqtt": "^1.5.0",
     "mqtt-regex-builder": "^1.0.0"

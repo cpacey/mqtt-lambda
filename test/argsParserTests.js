@@ -14,7 +14,7 @@ describe( 'argsParser', function() {
             argsParser( argv, env );
 
             assert.deepEqual( env, {
-                MQTT_CLIENT_CLEAN: true
+                MQTT_CLIENT_CLEAN: 'true'
             } );
         } );
     } );
@@ -28,7 +28,7 @@ describe( 'argsParser', function() {
             argsParser( argv, env );
 
             assert.deepEqual( env, {
-                MQTT_CLIENT_CLEAN: true,
+                MQTT_CLIENT_CLEAN: 'true',
                 MQTT_BROKER_URL: 'mqtt://test.org'
             } );
         } );
@@ -43,7 +43,7 @@ describe( 'argsParser', function() {
             argsParser( argv, env );
 
             assert.deepEqual( env, {
-                MQTT_CLIENT_CLEAN: true,
+                MQTT_CLIENT_CLEAN: 'true',
                 SUBSCRIBERS_ROOT: './test/'
             } );
         } );
@@ -58,7 +58,7 @@ describe( 'argsParser', function() {
             argsParser( argv, env );
 
             assert.deepEqual( env, {
-                MQTT_CLIENT_CLEAN: true,
+                MQTT_CLIENT_CLEAN: 'true',
                 MQTT_CLIENT_ID: 'abc'
             } );
         } );
@@ -73,7 +73,7 @@ describe( 'argsParser', function() {
             argsParser( argv, env );
 
             assert.deepEqual( env, {
-                MQTT_CLIENT_CLEAN: true
+                MQTT_CLIENT_CLEAN: 'true'
             } );
         } );
     } );
@@ -87,7 +87,7 @@ describe( 'argsParser', function() {
             argsParser( argv, env );
 
             assert.deepEqual( env, {
-                MQTT_CLIENT_CLEAN: false
+                MQTT_CLIENT_CLEAN: 'false'
             } );
         } );
     } );
