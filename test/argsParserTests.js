@@ -9,7 +9,7 @@ describe( 'argsParser', function() {
         it( 'should be parsed', function() {
 
             var argv = [ 'node', 'test.js' ];
-            var env =  {};
+            var env = {};
 
             argsParser( argv, env );
 
@@ -23,7 +23,7 @@ describe( 'argsParser', function() {
         it( 'should be parsed', function() {
 
             var argv = [ 'node', 'test.js', '--brokerUrl', 'mqtt://test.org' ];
-            var env =  {};
+            var env = {};
 
             argsParser( argv, env );
 
@@ -38,7 +38,7 @@ describe( 'argsParser', function() {
         it( 'should be parsed', function() {
 
             var argv = [ 'node', 'test.js', '--subscribersRoot', './test/' ];
-            var env =  {};
+            var env = {};
 
             argsParser( argv, env );
 
@@ -53,7 +53,7 @@ describe( 'argsParser', function() {
         it( 'should be parsed', function() {
 
             var argv = [ 'node', 'test.js', '--clientId', 'abc' ];
-            var env =  {};
+            var env = {};
 
             argsParser( argv, env );
 
@@ -68,7 +68,7 @@ describe( 'argsParser', function() {
         it( 'should be parsed', function() {
 
             var argv = [ 'node', 'test.js', '--clean', 'true' ];
-            var env =  {};
+            var env = {};
 
             argsParser( argv, env );
 
@@ -82,7 +82,7 @@ describe( 'argsParser', function() {
         it( 'should be parsed', function() {
 
             var argv = [ 'node', 'test.js', '--clean', 'false' ];
-            var env =  {};
+            var env = {};
 
             argsParser( argv, env );
 
