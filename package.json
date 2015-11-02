@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/CanTireInnovations/mqtt-lambda#readme",
   "dependencies": {
+    "args": "0.0.3",
     "bluebird": "^3.0.2",
     "bunyan": "^1.5.1",
     "cti-process-environment-variable-reader": "^1.0.0",
