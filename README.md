@@ -8,3 +8,23 @@ export MQTT_BROKER_URL=mqtt://localhost
 export SUBSCRIBERS_ROOT=./examples
 npm start
 ```
+
+## Environment Variables
+
+Required:
+```
+MQTT_BROKER_URL:                The url of the mqtt broker
+SUBSCRIBERS_ROOT:               The directory to load the lambda subscribers from
+```
+Optional:
+
+```
+MQTT_CLIENT_ID:                 The mqtt client's id
+MQTT_CLIENT_CONNECT_TIMEOUT:    The client's connection timeout in milliseconds
+MQTT_CLIENT_KEEPALIVE:          The client's keep alive in seconds
+
+MQTT_CLIENT_USERNAME:           The client's username
+MQTT_CLIENT_PASSWORD:           The client's password
+
+REQUIRE_CLIENT_ID:              Whether or not to require a client id
+```
