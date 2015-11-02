@@ -1,4 +1,7 @@
 #!/usr/bin/env node
 
+var argsParser = require( './argsParser.js' );
+argsParser( process.argv, process.env );
+
 var run = require( '../lib/service.js' );
 run();
