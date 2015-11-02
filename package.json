@@ -1,6 +1,6 @@
 {
   "name": "mqtt-lambda",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A service for hosting independent mqtt subscribers.",
   "bin": {
     "mqtt-lambda": "./bin/mqtt-lambda"
