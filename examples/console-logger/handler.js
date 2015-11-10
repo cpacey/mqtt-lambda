@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = {
+module.exports = [ {
 
-    name: 'console-logger',
+    name: 'console-logger-info',
 
     subscription: {
-        topic: 'console',
+        topic: 'info',
         qos: 0
     },
 
@@ -13,4 +13,15 @@ module.exports = {
         console.info( message.toString() );
     }
 
-};
+}, {
+    name: 'console-logger-warn',
+
+    subscription: {
+        topic: 'warn',
+        qos: 0
+    },
+
+    receive: function( topic, message ) {
+        console.warn( message.toString() );
+    }
+} ];
