@@ -25,7 +25,7 @@
     "subscription"
   ],
   "author": "CTI",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/CanTireInnovations/mqtt-lambda/issues"
   },
