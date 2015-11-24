@@ -5,6 +5,8 @@
   },
   "ecmaFeatures": {
     "arrowFunctions": true,
+    "blockBindings": true,
+    "classes": true,
     "defaultParams": true,
     "objectLiteralShorthandProperties": true,
     "templateStrings": true
