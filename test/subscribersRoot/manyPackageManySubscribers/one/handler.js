@@ -1,5 +1,5 @@
 'use strict';
 
-var objects = require( '../../../subscriberLoaderTestsObjects' );
+var objects = require( '../../../subscribersLoaderTestsObjects' );
 
 module.exports = objects.three;
