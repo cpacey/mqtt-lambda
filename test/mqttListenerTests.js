@@ -1,13 +1,12 @@
 'use strict';
 
-var assert = require( 'assert' );
-var mqtt = require( 'mqtt' );
-var mqttPacket = require( 'mqtt-packet' );
-var MqttStatus = require( '../lib/MqttStatus.js' );
-var net = require( 'net' );
-var Promise = require( 'bluebird' );
+const assert = require( 'assert' );
+const mqtt = require( 'mqtt' );
+const mqttPacket = require( 'mqtt-packet' );
+const net = require( 'net' );
+const Promise = require( 'bluebird' );
 
-var brokerUrl = 'mqtt://localhost';
+const brokerUrl = 'mqtt://localhost';
 
 /* eslint-disable no-process-env */
 process.env = {
@@ -17,8 +16,9 @@ process.env = {
 };
 /* eslint-enable no-process-env */
 
-var conf = require( '../lib/conf.js' );
-var mqttListener = require( '../lib/mqttListener.js' );
+const conf = require( '../lib/conf.js' );
+const mqttListener = require( '../lib/mqttListener.js' );
+const MqttStatus = require( '../lib/MqttStatus.js' );
 
 describe( 'mqttListener', function() {
 
