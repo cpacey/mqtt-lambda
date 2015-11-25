@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 
 npm adduser <<!
 $NPM_USERNAME
