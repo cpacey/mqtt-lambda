@@ -21,6 +21,7 @@ test:
         - npm run docker.build
 
 deployment:
+
     publish:
         branch: master
         owner: CanTireInnovations
@@ -34,5 +35,15 @@ deployment:
 
             - npm run docker.buildAndPush:
                 environment:
-                    DOCKER_BUILD_TAG: latest
+                    DOCKER_BUILD_TAG: nightly
 
+    release:
+        branch: /^release/v.+$/
+        owner: CanTireInnovations
+        commands:
+
+            - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
+            - npm publish
+
+            - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" -e no-reply@cantireinnovations.com
+            - export DOCKER_BUILD_TAG=$( echo "$CIRCLE_BRANCH" | sed "s/^release\///" ) && npm run docker.buildAndPush
