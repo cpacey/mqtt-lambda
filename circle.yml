@@ -22,24 +22,14 @@ test:
 
 deployment:
 
-    release:
-        tag: /v[0-9]+(\.[0-9]+)*/
-        owner: CanTireInnovations
-        commands:
-
-            - echo -e "$NPM_USERNAME\n$NPM_PASSWORD\n$NPM_EMAIL" | npm login
-            - npm publish
-
-            - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" -e no-reply@cantireinnovations.com
-            - npm run docker.buildAndPush:
-                environment:
-                    DOCKER_BUILD_TAG: $CIRCLE_BRANCH
     latest:
         branch: master
         owner: CanTireInnovations
         commands:
+            - circle/deploy-release.sh
 
-            - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD" -e no-reply@cantireinnovations.com
-            - npm run docker.buildAndPush:
-                environment:
-                    DOCKER_BUILD_TAG: latest
+    release:
+        tag: /v[0-9]+(\.[0-9]+)*/
+        owner: CanTireInnovations
+        commands:
+            - circle/deploy-release.sh
