@@ -8,3 +8,5 @@ WORKDIR /opt/mqtt-lambda
 RUN npm install --production
 
 CMD [ "/opt/mqtt-lambda/bin/mqtt-lambda" ]
+
+EXPOSE 80
