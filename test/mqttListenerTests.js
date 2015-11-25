@@ -1,12 +1,12 @@
 'use strict';
 
-var assert = require( 'assert' );
-var mqtt = require( 'mqtt' );
-var mqttPacket = require( 'mqtt-packet' );
-var net = require( 'net' );
-var Promise = require( 'bluebird' );
+const assert = require( 'assert' );
+const mqtt = require( 'mqtt' );
+const mqttPacket = require( 'mqtt-packet' );
+const net = require( 'net' );
+const Promise = require( 'bluebird' );
 
-var brokerUrl = 'mqtt://localhost';
+const brokerUrl = 'mqtt://localhost';
 
 /* eslint-disable no-process-env */
 process.env = {
@@ -16,13 +16,16 @@ process.env = {
 };
 /* eslint-enable no-process-env */
 
-var conf = require( '../lib/conf.js' );
-var mqttListener = require( '../lib/mqttListener.js' );
+const conf = require( '../lib/conf.js' );
+const mqttListener = require( '../lib/mqttListener.js' );
+const MqttStatus = require( '../lib/MqttStatus.js' );
 
 describe( 'mqttListener', function() {
 
     describe( 'when connects', function() {
         it( 'should subscribe and receive messages', function() {
+
+            const mqttStatus = new MqttStatus();
 
             var testSubscriber = {
                 subscription: {
@@ -37,8 +40,11 @@ describe( 'mqttListener', function() {
                 };
             } );
 
-            return mqttListener( testSubscriber )
+            return mqttListener( testSubscriber, mqttStatus )
                 .then( function( listener ) {
+
+                    assert( mqttStatus.connected, 'should be connected' );
+                    assert( mqttStatus.subscribed, 'should be connected' );
 
                     var testClient = Promise.promisifyAll( mqtt.connect( brokerUrl ) );
                     return testClient
@@ -65,6 +71,8 @@ describe( 'mqttListener', function() {
 
     describe( 'when connection fails', function() {
         it( 'should throw error', function() {
+
+            const mqttStatus = new MqttStatus();
 
             var testSubscriber = {
                 subscription: {
@@ -93,12 +101,14 @@ describe( 'mqttListener', function() {
 
                     conf.broker.url = 'mqtt://localhost:1884';
 
-                    return mqttListener( testSubscriber )
+                    return mqttListener( testSubscriber, mqttStatus )
                         .then( function() {
                             assert.fail( 'should not have connected' );
                         } )
                         .catch( function( err ) {
                             assert.equal( err.message, 'Connection refused: Bad username or password' );
+                            assert( !mqttStatus.connected, 'should not be connected' );
+                            assert( !mqttStatus.subscribed, 'should not be connected' );
                         } );
                 } )
                 .finally( function() {
