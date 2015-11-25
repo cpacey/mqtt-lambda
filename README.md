@@ -26,10 +26,11 @@ MQTT_CLIENT_KEEPALIVE:          The client's keep alive in seconds
 MQTT_CLIENT_USERNAME:           The client's username
 MQTT_CLIENT_PASSWORD:           The client's password
 
-REQUIRE_CLIENT_ID:              Whether or not to require a client id
+REQUIRE_CLIENT_ID:              Whether or not to require a client id. Set this in your Dockerfile if you require
+
+API_PORT:                       The monitoring api port. Defaults to 80
 
 LAMBDA_LOG_NAME:                The name of the bunyan logger used by mqtt-lambda
 LAMBDA_LOG_LEVEL:               The log level used by mqtt-lambda
-
 LAMBDA_VERSION:                 The version to stamp log messages with and show in the web api
 ```
