@@ -403,4 +403,69 @@ describe( 'subscriberMerger', function() {
         } );
     } );
 
+    describe( 'receive', function() {
+
+        describe( 'when first subscriber throws', function() {
+            it( 'should still call subsequent subscribers', function() {
+
+                var subscriberA = {
+                    subscription: {
+                        topic: 'test/+',
+                        qos: 0
+                    },
+                    receive: sinon.stub().throws( new Error() )
+                };
+
+                var subscriberB = {
+                    subscription: {
+                        topic: '#',
+                        qos: 1
+                    },
+                    receive: sinon.spy()
+                };
+
+                var ret = subscriberMerger( [ subscriberA, subscriberB ] );
+
+                var topic = 'test/try';
+                var msg = 'ignored';
+
+                ret.receive( topic, msg );
+
+                sinon.assert.calledOnce( subscriberA.receive );
+                sinon.assert.calledOnce( subscriberB.receive );
+            } );
+        } );
+
+        describe( 'when first subscriber returns rejected Promise', function() {
+            it( 'should still call subsequent subscribers', function() {
+
+                var subscriberA = {
+                    subscription: {
+                        topic: 'test/+',
+                        qos: 0
+                    },
+                    receive: sinon.stub().returns( Promise.reject() )
+                };
+
+                var subscriberB = {
+                    subscription: {
+                        topic: '#',
+                        qos: 1
+                    },
+                    receive: sinon.spy()
+                };
+
+                var ret = subscriberMerger( [ subscriberA, subscriberB ] );
+
+                var topic = 'test/try';
+                var msg = 'ignored';
+
+                ret.receive( topic, msg );
+
+                sinon.assert.calledOnce( subscriberA.receive );
+                sinon.assert.calledOnce( subscriberB.receive );
+            } );
+        } );
+    } );
+
 } );
