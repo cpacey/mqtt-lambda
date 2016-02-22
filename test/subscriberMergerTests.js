@@ -6,18 +6,19 @@ var sinon = require( 'sinon' );
 var log = require( '../lib/log.js' );
 var subscriberMerger = require( '../lib/subscriberMerger.js' );
 
-var logWarnSpy = sinon.spy( log, 'warn' );
-var logErrorSpy = sinon.spy( log, 'error' );
-
-function resetSpies() {
-    logWarnSpy.reset();
-    logErrorSpy.reset();
-}
-
 describe( 'subscriberMerger', function() {
 
-    beforeEach( resetSpies );
-    after( resetSpies );
+    var logWarnSpy;
+    var logErrorSpy;
+
+    beforeEach( () => {
+        logWarnSpy = sinon.spy( log, 'warn' );
+        logErrorSpy = sinon.spy( log, 'error' );
+    } );
+    afterEach( () => {
+        logWarnSpy.restore();
+        logErrorSpy.restore();
+    } );
 
     describe( 'when no subscribers', function() {
         it( 'should throw', function() {
