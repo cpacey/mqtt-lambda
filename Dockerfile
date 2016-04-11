@@ -1,4 +1,4 @@
-FROM node:4.1.0
+FROM node:4.4.2
 MAINTAINER Canadian Tire Innovations
 
 ENV SUBSCRIBERS_ROOT=/opt/mqtt-subscribers
